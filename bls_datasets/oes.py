@@ -122,7 +122,7 @@ def get_data(year=CUR_YEAR, cut_by='national', area_focus=None,
     if int(year) > CUR_YEAR:
         raise ValueError(f'Year:{year}. OES data not available yet.')
 
-    if (industry_scope != None) or (industry_scope not in range(3, 7)):
+    if industry_scope != None and industry_scope not in range(3, 7):
         raise ValueError(f'Industry scope:{industry_scope}. '
             'Not a valid industry scope. Options include ints from 3 to 6')
 
