@@ -1,11 +1,14 @@
 # bls-datasets
-Wrapper for making datasets easily accessible to pyhon developers.
+Making datasets easily accessible to python scripts.
+
+
 
 Integrated datasets include:
 - [Occupational Employment Statistics (OES)](https://www.bls.gov/oes/)
 - [Quarterly Census of Employment and Wages (QCEW)](https://www.bls.gov/cew/)
+- *Coming soon: Employment Projections ad Definition files*
 
-For BLS series lookups, checkout OlverSherouse's library [BLS](https://github.com/OliverSherouse/bls)
+For looking up BLS data via series-id lookups, please checkout OlverSherouse's library: [BLS](https://github.com/OliverSherouse/bls)
 # Usage
 
 ```
@@ -49,10 +52,10 @@ Index(['area_fips', 'own_code', 'industry_code', 'agglvl_code', 'size_code',
        'oty_avg_wkly_wage_pct_chg'],
       dtype='object')
 
-# What were the aberage weekly earnings in Fresno County for 2017 Q1?
+# What were the average weekly earnings in Fresno County for 2017 Q1?
 
 # FIPS code, area title
-# 06019,	Fresno County, California
+# 06019, Fresno County, California
 
 >>> fresno = df_qcew[(df_qcew.own_code == 0) & (df_qcew.area_fips == '06019')]
 >>> fresno.avg_wkly_wage.values[0]
@@ -61,6 +64,13 @@ Index(['area_fips', 'own_code', 'industry_code', 'agglvl_code', 'size_code',
 
 ```
 
+# Installation
+`pip install bls-datasets`
+
+# Documentation
+Documentation coming soon. Please reference the docstrings of the source code for now.
+
+
 # Notes on datasets
 
 
@@ -68,14 +78,15 @@ Index(['area_fips', 'own_code', 'industry_code', 'agglvl_code', 'size_code',
 
 OES consists of occupational statistics, primarily: employment, age, and salary. To learn more about this survey, you can visit this [link](https://www.bls.gov/oes/oes_emp.htm).
 
-Note that due to idiosyncracies in filenaming conventions, this package only allows data access starting in 2014. Earlier files are available, although they are broken into multiple excel spreadsheets and have different naming patterns. I will not integrate any earlier years, unless I see it necessary, or recieve enough user requests.
+Note that due to idiosyncrasies in earlier OES datasets, this package only allows data access starting in 2014. Earlier files are available, although, they are given different naming patterns, are often broken into multiple excel spreadsheets due to size constraints of older excel version, and they do not always consist of the same datacuts. I will not integrate any earlier years, unless I see it necessary, or receive enough user requests.
 
 **QCEW**
 
-QCEW conists of employer reported occupational statistics. 
+QCEW consists of employer reported occupational statistics. Data can be cut/sliced by area, industry or company size. To learn more about this survey, you can visit this [link](https://www.bls.gov/cew/)
 
-Common gotcha with QCEW data:
+
+Common gotchas with QCEW data:
 - Datatypes are not always what you expect them to be. Reference the following tables when performing dataframe operations
   - [Quarterly data slice layout](https://data.bls.gov/cew/doc/access/csv_data_slices.htm##QTR_LAYOUT)
   - [Annual averages slice layout](https://data.bls.gov/cew/doc/access/csv_data_slices.htm##ANNUAL_LAYOUT)
-- Due to employer confidentiality, some of the figures may be unavailable. This is especially true when making more granular data cuts. Do check the disclosure_code columns for this.
+- Due to employer confidentiality, some of the figures may be unavailable. This is especially true when making more granular data cuts. Do check the `disclosure_code` columns for this.

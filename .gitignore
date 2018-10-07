@@ -24,3 +24,6 @@ MANIFEST
 
 # Environments
 venv/
+
+# MR Developer
+scripts/
