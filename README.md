@@ -6,7 +6,7 @@ Making datasets easily accessible to python scripts.
 Integrated datasets include:
 - [Occupational Employment Statistics (OES)](https://www.bls.gov/oes/)
 - [Quarterly Census of Employment and Wages (QCEW)](https://www.bls.gov/cew/)
-- *Coming soon: Employment Projections ad Definition files*
+- *Coming soon: Employment Projections and Definition files*
 
 For looking up BLS data via series-id lookups, please checkout OlverSherouse's library: [BLS](https://github.com/OliverSherouse/bls)
 # Usage
