@@ -8,7 +8,7 @@ Integrated datasets include:
 - [Quarterly Census of Employment and Wages (QCEW)](https://www.bls.gov/cew/)
 - *Coming soon: Employment Projections and Definition files*
 
-For looking up BLS data via series-id lookups, please checkout OlverSherouse's library: [BLS](https://github.com/OliverSherouse/bls)
+For looking up BLS data via series-id lookups, please checkout OliverSherouse's library: [BLS](https://github.com/OliverSherouse/bls)
 # Usage
 
 ```
@@ -68,7 +68,7 @@ Index(['area_fips', 'own_code', 'industry_code', 'agglvl_code', 'size_code',
 `pip install bls-datasets`
 
 # Documentation
-Documentation coming soon. Please reference the docstrings of the source code for now.
+Documentation coming soon. Please reference the docstrings in the source code for now.
 
 
 # Notes on datasets
