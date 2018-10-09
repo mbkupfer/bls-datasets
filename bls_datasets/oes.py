@@ -4,7 +4,11 @@ import pandas as pd
 
 from . import util
 
-CUR_YEAR = datetime.date.today().year
+# Previous year OES gets released in May
+if datetime.date.today().month > 6:
+    CUR_YEAR = datetime.date.today().year - 1
+else:
+    CUR_YEAR = datetime.date.today().year - 2
 
 def _get_zip_urls(year):
     """Return urls for zip files based on pattern.
@@ -62,7 +66,7 @@ def _get_filenames(year, industry_scope=None):
 
 
 def get_data(year=CUR_YEAR, cut_by='national', area_focus=None,
-    industry_scope=None,rtype='dataframe'):
+    industry_scope=None,rtype='dataframe', set_missing_figures_as_na=True):
     """Get a dataset from the Occupational Employment Statistics (OES).
 
     The OES database contains statistics for various occupations.
@@ -94,6 +98,13 @@ def get_data(year=CUR_YEAR, cut_by='national', area_focus=None,
         If not specified, then the default is top level sectors (i.e 2 digit).
         Industry scope describes the level of industry granularity. Higher the
         scope, the more granular the industries will be.
+    set_missing_figures_as_na : bool, Default = True
+        BLS uses ['*', '**', '#', '~'] to designate missing non-numeric figures
+        in columns that have numeric statistics, such as hourly wage. This
+        mismatch converts the whole column to an object and not a number type.
+        By keeping this argument to True, this symbols will get converted
+        to NA values allowing these columns to be calculated and treated as
+        numbers.
     rtype : str
         Default behavior is to return a pandas dataframe.
         If you want a primitive i/o object that supports open(),
@@ -145,8 +156,14 @@ def get_data(year=CUR_YEAR, cut_by='national', area_focus=None,
         filename = OES_FILENAMES.get(cut_by)
 
     fp = util.get_file(zip_url, filename)
+
+    if set_missing_figures_as_na:
+        na_values = ['*', '**', '#', '~']
+    else:
+        na_values = []
+
     if rtype == 'dataframe':
-        return pd.read_excel(fp)
+        return pd.read_excel(fp, na_values = na_values)
     elif rtype == 'io':
         return fp
     else:
