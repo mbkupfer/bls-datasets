@@ -27,3 +27,4 @@ venv/
 
 # MR Developer
 scripts/
+*.ipynb
