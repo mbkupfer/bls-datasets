@@ -50,7 +50,7 @@ def _get_filenames(year, industry_scope=None):
     """
     if industry_scope == None:
         prefix = 'natsector'
-    elif industry_scope == (5 | 6):
+    elif (industry_scope == 5) or (industry_scope == 6):
         prefix = 'nat5d_6d'
     else:
         prefix = 'nat{}d'.format(industry_scope)
@@ -61,7 +61,7 @@ def _get_filenames(year, industry_scope=None):
         'metros': f'oesm{year[2:]}ma/MSA_M{year}_dl.xlsx',
         'metros-divisions': f'oesm{year[2:]}ma/aMSA_M{year}_dl.xlsx' ,
         'non-metros': f'oesm{year[2:]}ma/BOS_M{year}_dl.xlsx',
-        'industry': f'{prefix}_M{year}_dl.xlsx'
+        'industry': f'oesm{year[2:]}in4/{prefix}_M{year}_dl.xlsx'
     }
 
 
@@ -161,7 +161,7 @@ def get_data(year=CUR_YEAR, cut_by='national', area_focus=None,
         na_values = ['*', '**', '#', '~']
     else:
         na_values = []
-
+        
     if rtype == 'dataframe':
         return pd.read_excel(fp, na_values = na_values)
     elif rtype == 'io':
