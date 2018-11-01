@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='bls_datasets',
-    version='0.0.8',
+    version='0.0.9',
     description='Python library for retrieving BLS datasets',
     long_description_content_type='text/markdown',
     long_description=long_description,
