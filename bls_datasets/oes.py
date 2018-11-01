@@ -151,7 +151,7 @@ def get_data(year=CUR_YEAR, cut_by='national', area_focus=None,
         if filename == None:
             raise ValueError('"{}" is not a valid area focus\n' \
                 'valid options include:\n{}' \
-                .format(cut_by, ['metros', 'metros-divisions', 'non-metros']))
+                .format(area_focus, ['metros', 'metros-divisions', 'non-metros']))
     else:
         filename = OES_FILENAMES.get(cut_by)
 
